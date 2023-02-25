@@ -16,7 +16,6 @@ contract TelephoneTest is DSTest {
     }
 
     function testTelephoneHack() public {
-
         /////////////////
         // LEVEL SETUP //
         /////////////////
@@ -27,21 +26,17 @@ contract TelephoneTest is DSTest {
         address levelAddress = ethernaut.createLevelInstance(telephoneFactory);
         Telephone ethernautTelephone = Telephone(payable(levelAddress));
 
-
         //////////////////
         // LEVEL ATTACK //
         //////////////////
-
-        // Create TelephoneHack contract
-        TelephoneHack telephoneHack = new TelephoneHack(levelAddress);
-        // Call the attack function
-        telephoneHack.attack();
 
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
 
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
+            payable(levelAddress)
+        );
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }
