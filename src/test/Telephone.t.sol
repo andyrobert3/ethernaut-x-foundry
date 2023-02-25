@@ -30,6 +30,12 @@ contract TelephoneTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        TelephoneHack telephoneHack = new TelephoneHack(
+            address(ethernautTelephone)
+        );
+
+        telephoneHack.attack();
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
