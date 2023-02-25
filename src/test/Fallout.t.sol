@@ -32,6 +32,8 @@ contract FalloutTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        ethernautFallout.Fal1out();
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
