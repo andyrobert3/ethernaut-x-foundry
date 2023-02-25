@@ -1,7 +1,6 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
-import "../CoinFlip/CoinFlipHack.sol";
 import "../CoinFlip/CoinFlipFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
