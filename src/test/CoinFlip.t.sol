@@ -1,6 +1,7 @@
 pragma solidity ^0.8.10;
 
 import "ds-test/test.sol";
+import "../CoinFlip/CoinFlipHack.sol";
 import "../CoinFlip/CoinFlipFactory.sol";
 import "../Ethernaut.sol";
 import "./utils/vm.sol";
@@ -28,6 +29,20 @@ contract CoinFlipTest is DSTest {
         //////////////////
         // LEVEL ATTACK //
         //////////////////
+
+        // Move the block from 0 to 1 to prevent underflow errors when "subtracting by 1"
+        vm.roll(1);
+
+        CoinFlipHack coinFlipHack = new CoinFlipHack(
+            address(ethernautCoinFlip)
+        );
+
+        // Run the attack 10 times, iterate the block each time, function can only be called once per block
+        for (uint256 i = 0; i <= 10; i++) {
+            // Must be on latest version of foundry - blockhash was defaulting to 0 in earlier version of foundry resolved in this commit https://github.com/gakonst/foundry/pull/728
+            vm.roll(1 + i);
+            coinFlipHack.attack();
+        }
 
         //////////////////////
         // LEVEL SUBMISSION //
