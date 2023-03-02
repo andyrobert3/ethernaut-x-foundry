@@ -33,6 +33,10 @@ contract ForceTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        ForceHack forceHack = (new ForceHack){value: 0.1 ether}(
+            address(ethernautForce)
+        );
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
